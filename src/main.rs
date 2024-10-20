@@ -108,7 +108,7 @@ fn main() {
     let img = Image::gen_image_color(screen.0, screen.1, Color::WHITE);    
     let mut texture = rl.load_texture_from_image(&thread, &img).unwrap();
 
-    let grid = Grid { color : Color::WHITE, size : 50 };
+    let grid = Grid { color : Color::alpha(&Color::WHITE, 0.5), size : 50 };
 
 
     while !rl.window_should_close() {        
@@ -150,6 +150,8 @@ fn main() {
         d.draw_texture(&texture, 0, 0,  Color::WHITE);
 
         grid.draw(screen.0, screen.1, &mut d);    
+
+        d.draw_text("LEFT-CLICK to ADD", 10, screen.1 - 50, 22, Color::RED);
         d.draw_fps(screen.0 - 100, screen.1 - 50);
 
         if d.is_mouse_button_released(MouseButton::MOUSE_BUTTON_LEFT) {           
